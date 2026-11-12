@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A daily field guide to execution, confidence and decisiveness.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
+<title>Becoming Person B</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column, sticky section bar, a "Today" worksheet on top, long-form lessons below. */
+:root {
+  --bg: #F1F4F2;
+  --panel: #FAFBFA;
+  --ink: #121E19;
+  --muted: #55655E;
+  --line: #D3DBD6;
+  --accent: #0A6B55;
+  --accent-ink: #FFFFFF;
+  --mark: #E4F07A;
+  --mark-ink: #121E19;
+
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1512;
+    --panel: #151E1A;
+    --ink: #E8EFEB;
+    --muted: #9AAAA1;
+    --line: #26332D;
+    --accent: #55D1AE;
+    --accent-ink: #0A1411;
+    --mark: #4B5B14;
+    --mark-ink: #F2F8CC;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1512;
+  --panel: #151E1A;
+  --ink: #E8EFEB;
+  --muted: #9AAAA1;
+  --line: #26332D;
+  --accent: #55D1AE;
+  --accent-ink: #0A1411;
+  --mark: #4B5B14;
+  --mark-ink: #F2F8CC;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 72px;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+}
+.wrap { max-width: 46rem; margin: 0 auto; }
+
+/* Top bar */
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 9;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-block: 10px;
+}
+.bar .brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.bar nav { min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.bar nav::-webkit-scrollbar { display: none; }
+.bar ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.bar a {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.bar a:hover { color: var(--ink); background: var(--panel); }
+a:focus-visible, button:focus-visible, textarea:focus-visible, input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Type */
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.7rem, 4.5vw, 2.2rem); font-weight: 700; letter-spacing: -0.015em; }
+h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+mark {
+  background: var(--mark);
+  color: var(--mark-ink);
+  padding: 0.05em 0.3em;
+  border-radius: 2px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+ul.dots, ol.steps { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+ul.dots li::marker { color: var(--accent); }
+ol.steps li::marker { font-family: var(--font-mono); color: var(--accent); }
+
+/* Hero */
+.hero { padding-block: 56px 36px; display: flex; flex-direction: column; gap: 20px; }
+.hero .lede { font-size: 1.25rem; line-height: 1.5; max-width: 34ch; }
+.hero .sub { color: var(--muted); }
+
+/* Today worksheet */
+.today {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  scroll-margin-top: 70px;
+}
+.today-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; }
+.focus { display: flex; flex-direction: column; gap: 10px; }
+.focus .name { font-family: var(--font-display); font-size: clamp(1.9rem, 6vw, 2.6rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+.focus .say { font-size: 1.2rem; }
+.focus .do { color: var(--muted); }
+.focus .do b { color: var(--ink); font-weight: 600; }
+.block { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--line); padding-top: 20px; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.prog { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.prog i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease; }
+.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.checks li { border-bottom: 1px solid var(--line); }
+.checks li:last-child { border-bottom: 0; }
+.checks label { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; cursor: pointer; }
+.checks input { width: 20px; height: 20px; margin: 4px 0 0; flex: none; accent-color: var(--accent); }
+.checks span { min-width: 0; }
+.checks input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+.checks small { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
+.review { display: flex; flex-direction: column; gap: 10px; }
+.review ul { margin: 0; padding-left: 1.2em; color: var(--muted); }
+textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px;
+}
+.week { display: flex; gap: 10px; }
+.week .d { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.week .sq {
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: linear-gradient(to top, var(--accent) var(--fill, 0%), transparent var(--fill, 0%));
+}
+.week .d.now .sq { border-color: var(--ink); }
+.note { font-size: 14px; color: var(--muted); font-family: var(--font-body); }
+
+/* Lesson sections */
+section.part { padding-block: 64px 0; scroll-margin-top: 56px; display: flex; flex-direction: column; gap: 28px; }
+.part-intro { display: flex; flex-direction: column; gap: 14px; }
+.habit { border-top: 1px solid var(--line); padding-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.habit .tag { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.say-line { font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; line-height: 1.3; max-width: 30ch; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pair > div { min-width: 0; padding: 16px 18px; border-radius: 4px; display: flex; flex-direction: column; gap: 10px; }
+.pair .a { border: 1px dashed var(--line); }
+.pair .b { border: 1px solid var(--accent); background: var(--panel); }
+.pair .a .label { color: var(--muted); }
+.pair .b .label { color: var(--accent); }
+.pair ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; }
+.pair .a ul { color: var(--muted); }
+.pair .a ul li::marker { color: var(--muted); }
+.pair .b ul li::marker { color: var(--accent); }
+.pair q { quotes: none; font-style: italic; }
+.threes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.threes > div { min-width: 0; border-top: 2px solid var(--accent); padding-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.threes h3 { font-size: 1.15rem; }
+.threes p { font-size: 16px; color: var(--muted); }
+
+/* Principles */
+.plist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.prin {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: baseline;
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--line);
+}
+.prin .pn { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; }
+.prin .ps { min-width: 0; }
+.prin.on { background: var(--panel); box-shadow: inset 3px 0 0 var(--accent); }
+.pin {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pin:hover { border-color: var(--accent); }
+.pin[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+/* Books */
+.books { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.books li { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.books .t { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; }
+.books .au { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+
+/* Creed */
+.creed {
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--panel);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.creed p { font-size: 1.15rem; max-width: 52ch; }
+.tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.tracks > div { min-width: 0; border: 1px solid var(--line); border-radius: 4px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.tracks h3 { font-size: 1.1rem; }
+.tracks p { font-size: 16px; color: var(--muted); }
+footer { padding-top: 56px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  .bar .brand { display: none; }
+  .hero { padding-block: 36px 28px; }
+  .today { padding: 18px; }
+  .pair, .threes, .tracks { grid-template-columns: 1fr; }
+  .prin { grid-template-columns: minmax(0, 1fr) auto; }
+  .prin .ps { grid-column: 1 / -1; grid-row: 2; }
+  .creed { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .prog i { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="bar">
+    <span class="brand">Person B</span>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#today">Today</a></li>
+        <li><a href="#mindset">Mindset</a></li>
+        <li><a href="#confidence">Confidence</a></li>
+        <li><a href="#easy">Why it looks easy</a></li>
+        <li><a href="#principles">Principles</a></li>
+        <li><a href="#books">Books</a></li>
+        <li><a href="#creed">Creed</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">A field guide to getting things done</p>
+    <h1>Becoming Person B</h1>
+    <p class="lede">Some people start businesses, decide quickly, speak with confidence and stay calm around competition. They don't work harder than everyone else. They think differently about work, time and themselves.</p>
+    <p class="sub">Read one principle each morning. Do the one thing it asks. Check in at night.</p>
+  </header>
+
+  <!-- TODAY -->
+  <section class="today" id="today" aria-label="Today">
+    <div class="today-head">
+      <span class="label">Today's focus</span>
+      <span class="label" id="t-date">&nbsp;</span>
+    </div>
+
+    <div class="focus">
+      <div class="name" id="t-name">Action bias</div>
+      <p class="say"><mark id="t-say">Start before you feel ready.</mark></p>
+      <p class="do"><b>Do this today.</b> <span id="t-do">Start the thing you have been postponing. Work on it for the first ten minutes, ready or not.</span></p>
+      <p class="note">The focus rotates daily. To work on a different one, pick it under <a href="#principles">Principles</a>.</p>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="label">Daily actions</span>
+        <span class="label" id="prog-text">0 of 5</span>
+      </div>
+      <div class="prog" aria-hidden="true"><i id="prog-bar"></i></div>
+      <ul class="checks">
+        <li><label for="c0"><input type="checkbox" id="c0" data-i="0"><span>Write the next action for my most important task, then start it.<small>Execution over contemplation</small></span></label></li>
+        <li><label for="c1"><input type="checkbox" id="c1" data-i="1"><span>Finish one task in a single focused sitting, with no feed and no tabs.<small>Urgency and focus</small></span></label></li>
+        <li><label for="c2"><input type="checkbox" id="c2" data-i="2"><span>Take one intimidating thing and break it into small actions.<small>Don't romanticize difficulty</small></span></label></li>
+        <li><label for="c3"><input type="checkbox" id="c3" data-i="3"><span>Make one decision with the information I already have.<small>Decisiveness</small></span></label></li>
+        <li><label for="c4"><input type="checkbox" id="c4" data-i="4"><span>Do one thing where I look like a beginner: ask, pitch, negotiate or admit I don't know.<small>Comfortable being a beginner</small></span></label></li>
+      </ul>
+    </div>
+
+    <div class="block review">
+      <span class="label">Evening check-in</span>
+      <ul>
+        <li>What did I finish today?</li>
+        <li>What did I delay with no good reason?</li>
+        <li>What is my first action tomorrow?</li>
+      </ul>
+      <label for="review" class="note">Your notes for today</label>
+      <textarea id="review" placeholder="Write a few lines."></textarea>
+    </div>
+
+    <div class="block">
+      <div class="block-head">
+        <span class="label">Last 7 days</span>
+        <span class="label">Filled square = all five done</span>
+      </div>
+      <div class="week" id="week" aria-label="Last seven days"></div>
+      <p class="note">Checkmarks and notes are saved in this browser only, so they won't follow you to another device.</p>
+    </div>
+  </section>
+
+  <!-- MINDSET -->
+  <section class="part" id="mindset">
+    <div class="part-intro">
+      <p class="eyebrow">The mindset of highly effective people</p>
+      <h2>Five habits of thought behind people who finish things</h2>
+    </div>
+
+    <article class="habit">
+      <span class="tag">Habit 1</span>
+      <h3>Execution over contemplation</h3>
+      <p>Most people spend a disproportionate amount of time thinking about doing something.</p>
+      <ul class="dots">
+        <li>Should I start?</li>
+        <li>What if I fail?</li>
+        <li>What if someone else is better?</li>
+        <li>Let me research a little more.</li>
+        <li>I'll do it tomorrow.</li>
+      </ul>
+      <p>Highly effective people have a different default response:</p>
+      <p class="say-line"><mark>What's the next action? Let's get it done.</mark></p>
+      <p>They don't need to feel completely prepared before starting. They understand that clarity often comes from execution, not endless thinking.</p>
+    </article>
+
+    <article class="habit">
+      <span class="tag">Habit 2</span>
+      <h3>An unusually high sense of urgency</h3>
+      <p class="say-line">The faster I finish this, the earlier I get my freedom back.</p>
+      <p>They don't necessarily hate working. They hate unnecessary delays. Take two people with an assignment due in three days.</p>
+      <div class="pair">
+        <div class="a">
+          <span class="label">Person A</span>
+          <ul>
+            <li>Thinks about it throughout the day.</li>
+            <li>Opens Instagram.</li>
+            <li>Does a little work.</li>
+            <li>Gets distracted.</li>
+            <li>Feels guilty.</li>
+            <li>Finally finishes on the deadline.</li>
+          </ul>
+        </div>
+        <div class="b">
+          <span class="label">Person B</span>
+          <ul>
+            <li>Sits down.</li>
+            <li>Focuses for two hours.</li>
+            <li>Finishes it.</li>
+            <li>Has the remaining two days completely free.</li>
+          </ul>
+        </div>
+      </div>
+      <p>Unfinished work occupies mental space even when you're not actively working on it. <mark>Finishing things creates freedom.</mark></p>
+    </article>
+
+    <article class="habit">
+      <span class="tag">Habit 3</span>
+      <h3>They don't romanticize difficulty</h3>
+      <div class="pair">
+        <div class="a">
+          <span class="label">The average first reaction</span>
+          <q>This is going to be so hard.</q>
+        </div>
+        <div class="b">
+          <span class="label">The effective first reaction</span>
+          <q>Okay, what exactly needs to be done?</q>
+        </div>
+      </div>
+      <p>They break intimidating things into manageable actions. They don't necessarily believe everything is easy. They believe that difficulty is not a sufficient reason to avoid something.</p>
+      <ul class="dots">
+        <li>Coding a complex project? Break it down.</li>
+        <li>Starting a business? Find the first customer.</li>
+        <li>Learning something difficult? Study the fundamentals.</li>
+        <li>Competing with someone better? Improve your capabilities.</li>
+      </ul>
+      <p><mark>They turn problems into tasks rather than turning tasks into problems.</mark></p>
+    </article>
+
+    <article class="habit">
+      <span class="tag">Habit 4</span>
+      <h3>A strong internal locus of control</h3>
+      <p>This is a psychological concept worth understanding. It means believing that your actions significantly influence your outcomes.</p>
+      <div class="pair">
+        <div class="a">
+          <span class="label">Instead of thinking</span>
+          <ul>
+            <li>The market is too competitive.</li>
+            <li>Everyone is already doing this.</li>
+            <li>People are more talented than me.</li>
+            <li>I don't have the right connections.</li>
+          </ul>
+        </div>
+        <div class="b">
+          <span class="label">They ask</span>
+          <ul>
+            <li>What advantage can I develop?</li>
+            <li>What can I control?</li>
+            <li>How can I position myself differently?</li>
+            <li>What can I do today that improves my situation?</li>
+          </ul>
+        </div>
+      </div>
+      <p>They don't assume they control everything. They simply refuse to surrender control over the things they can influence.</p>
+    </article>
+
+    <article class="habit">
+      <span class="tag">Habit 5</span>
+      <h3>They are comfortable being beginners</h3>
+      <p>This is one of the biggest differences between confident people and insecure people. Imagine entering a room where everyone is more experienced than you.</p>
+      <div class="pair">
+        <div class="a">
+          <span class="label">One person thinks</span>
+          <q>These people are so much better than me. What if I say something stupid?</q>
+        </div>
+        <div class="b">
+          <span class="label">Another thinks</span>
+          <q>Interesting. These people know things I don't. Let me learn something.</q>
+        </div>
+      </div>
+      <p>The second person isn't necessarily more intelligent. They are less concerned with protecting their ego. They can:</p>
+      <ul class="dots">
+        <li>Ask seemingly stupid questions.</li>
+        <li>Approach successful people.</li>
+        <li>Negotiate.</li>
+        <li>Pitch an idea.</li>
+        <li>Make mistakes publicly.</li>
+        <li>Admit that they don't know something.</li>
+      </ul>
+      <p>Their self-worth isn't dependent on appearing intelligent every second.</p>
+    </article>
+  </section>
+
+  <!-- CONFIDENCE -->
+  <section class="part" id="confidence">
+    <div class="part-intro">
+      <p class="eyebrow">The confidence behind it</p>
+      <h2>Earned self-confidence</h2>
+      <p>There is a kind of confidence where someone walks into a competitive environment and doesn't immediately feel threatened. It comes from three things.</p>
+    </div>
+    <div class="threes">
+      <div>
+        <h3>Competence</h3>
+        <p>I have developed skills. I know how to solve problems. I can learn what I don't know.</p>
+      </div>
+      <div>
+        <h3>Repeated exposure</h3>
+        <p>I've faced difficult situations before. I've spoken to strangers, made mistakes, negotiated and recovered.</p>
+      </div>
+      <div>
+        <h3>Self-trust</h3>
+        <p>Even if things go wrong, I trust myself to figure out what to do next.</p>
+      </div>
+    </div>
+    <p>The last one is particularly powerful. Real confidence isn't necessarily thinking "I am better than everyone." It's thinking:</p>
+    <p class="say-line"><mark>Even if this is difficult, I can handle it.</mark></p>
+  </section>
+
+  <!-- WHY IT LOOKS EASY -->
+  <section class="part" id="easy">
+    <div class="part-intro">
+      <p class="eyebrow">Why everything seems easy to them</p>
+      <h2>Experience has become automatic</h2>
+      <p>Experienced people have already built mental frameworks for handling situations. A beginner sees a business opportunity and thinks about 50 different things that could go wrong. An experienced entrepreneur immediately thinks:</p>
+    </div>
+    <ol class="steps">
+      <li>Who is the customer?</li>
+      <li>What problem am I solving?</li>
+      <li>How much will they pay?</li>
+      <li>How do I acquire them?</li>
+      <li>What is the cheapest way to test this?</li>
+    </ol>
+    <p>The entrepreneur isn't necessarily smarter. They have developed pattern recognition through experience. Someone who has spoken to 500 clients doesn't feel the same anxiety as someone speaking to their first client.</p>
+    <p>What looks like natural confidence is often accumulated experience that has become automatic.</p>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="part" id="principles">
+    <div class="part-intro">
+      <p class="eyebrow">Ten principles to internalize</p>
+      <h2>Pick one and work on it today</h2>
+      <p>Each line is the thing to tell yourself. Press <b>Focus today</b> on a row to make it the focus at the top of the page for today.</p>
+    </div>
+    <ul class="plist" id="plist">
+      <li class="prin" data-do="Start the thing you have been postponing. Work on it for the first ten minutes, ready or not."><span class="pn">Action bias</span><span class="ps">Start before you feel ready.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Pick one simple task and finish it now, instead of stretching it across the day."><span class="pn">Speed</span><span class="ps">Don't unnecessarily prolong simple tasks.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Write down one problem you're facing and underline the part you can control. Act on that part."><span class="pn">Ownership</span><span class="ps">Find what you can control.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="When you hit a blocker, list three ways around it before you stop."><span class="pn">Resourcefulness</span><span class="ps">Find a way instead of finding excuses.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Choose one pending decision and make it now with what you know."><span class="pn">Decisiveness</span><span class="ps">Make decisions with available information.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Ask one question you would normally hold back for fear of looking inexperienced."><span class="pn">Ego independence</span><span class="ps">Don't be afraid of looking inexperienced.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Pick one task, put distractions away, and give it your complete attention for one sitting."><span class="pn">Focus</span><span class="ps">Give one task your complete attention.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Take the first step on something you feel unsure about, and trust yourself to handle what comes next."><span class="pn">Self-trust</span><span class="ps">I can figure things out.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Think of someone better than you at something. Name one capability you can build to close the gap."><span class="pn">Competition</span><span class="ps">Someone being better doesn't make me incapable.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+      <li class="prin" data-do="Set up one thing, like a template, checklist or note, that makes tomorrow's work easier."><span class="pn">Leverage</span><span class="ps">Build systems that make future work easier.</span><button class="pin" type="button" aria-pressed="false">Focus today</button></li>
+    </ul>
+    <p><mark>Don't confuse being fast with being careless.</mark> The objective is to eliminate unnecessary friction, not to eliminate necessary thinking.</p>
+  </section>
+
+  <!-- BOOKS -->
+  <section class="part" id="books">
+    <div class="part-intro">
+      <p class="eyebrow">Further reading</p>
+      <h2>Books that explore this mindset</h2>
+    </div>
+    <ul class="books">
+      <li>
+        <span class="t">The Almanack of Naval Ravikant</span>
+        <span class="au">Naval Ravikant</span>
+        <p>Develops ideas around leverage, wealth creation, specific knowledge, independence and decision-making.</p>
+      </li>
+      <li>
+        <span class="t">The 7 Habits of Highly Effective People</span>
+        <span class="au">Stephen R. Covey</span>
+        <p>Particularly useful for ownership, proactivity and prioritization.</p>
+      </li>
+      <li>
+        <span class="t">The Magic of Thinking Big</span>
+        <span class="au">David J. Schwartz</span>
+        <p>About overcoming self-imposed limitations and developing confidence.</p>
+      </li>
+      <li>
+        <span class="t">Deep Work</span>
+        <span class="au">Cal Newport</span>
+        <p>Teaches the ability to concentrate intensely and produce meaningful work without distractions.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CREED -->
+  <section class="part" id="creed">
+    <div class="part-intro">
+      <p class="eyebrow">Read this when you hesitate</p>
+      <h2>Two ways of living</h2>
+      <p>You want to gradually become Person B.</p>
+    </div>
+    <div class="pair">
+      <div class="a">
+        <span class="label">Person A</span>
+        <ul>
+          <li>Waits for motivation.</li>
+          <li>Avoids uncomfortable situations.</li>
+          <li>Overthinks decisions.</li>
+          <li>Gets intimidated by competition.</li>
+          <li>Wants to appear competent.</li>
+          <li>Constantly postpones things.</li>
+        </ul>
+      </div>
+      <div class="b">
+        <span class="label">Person B</span>
+        <ul>
+          <li>Takes initiative.</li>
+          <li>Finishes what they start.</li>
+          <li>Is comfortable with uncertainty.</li>
+          <li>Speaks even when nervous.</li>
+          <li>Doesn't mind being a beginner.</li>
+          <li>Treats difficult things as solvable problems.</li>
+          <li>Values their time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="creed">
+      <span class="label">The mindset to internalize</span>
+      <p>I don't need to be the smartest person in the room. I don't need to know everything. I don't need to wait until I am confident.</p>
+      <p><mark>I need to be resourceful, decisive, willing to learn and capable of executing.</mark></p>
+      <p>I will not unnecessarily complicate simple things. I will not spend three hours worrying about something I can solve in thirty minutes.</p>
+      <p>I will finish my responsibilities efficiently, protect my time, and use that freedom to build a life I actually enjoy.</p>
+      <p>I am not intimidated by competition. Competition is simply evidence that an opportunity exists and other people are pursuing it.</p>
+    </div>
+  </section>
+
+  <section class="part" id="tracks">
+    <div class="part-intro">
+      <p class="eyebrow">Go deeper</p>
+      <h2>Three tracks. Start with the one that matters most to you.</h2>
+    </div>
+    <div class="tracks">
+      <div>
+        <h3>Entrepreneur mindset</h3>
+        <p>Think like wealthy businesspeople: identify opportunities, take calculated risks and make money.</p>
+      </div>
+      <div>
+        <h3>Execution mindset</h3>
+        <p>Become extremely efficient, disciplined and decisive, someone who gets things done immediately.</p>
+      </div>
+      <div>
+        <h3>Confidence mindset</h3>
+        <p>Speak fearlessly, approach people, negotiate and stop feeling inferior in competitive environments.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>Come back tomorrow. The focus changes at midnight.</footer>
+</div>
+
+<script>
+(function () {
+  var COUNT = 5;
+
+  function read(k) {
+    try { var v = window.localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; }
+  }
+  function write(k, v) {
+    try { window.localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+  }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function keyFor(d) { return "pb:" + d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+
+  var now = new Date();
+  var todayKey = keyFor(now);
+  var state = read(todayKey) || {};
+  if (!Array.isArray(state.checks)) state.checks = [];
+  if (typeof state.review !== "string") state.review = "";
+  if (typeof state.pin !== "number") state.pin = null;
+
+  var rows = Array.prototype.slice.call(document.querySelectorAll("#plist .prin"));
+  var boxes = Array.prototype.slice.call(document.querySelectorAll(".checks input"));
+  var dayNumber = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
+  var rotation = dayNumber % rows.length;
+
+  function save() { write(todayKey, state); }
+
+  function currentIndex() {
+    return state.pin !== null && state.pin >= 0 && state.pin < rows.length ? state.pin : rotation;
+  }
+
+  function renderFocus() {
+    var i = currentIndex();
+    var row = rows[i];
+    document.getElementById("t-name").textContent = row.querySelector(".pn").textContent;
+    document.getElementById("t-say").textContent = row.querySelector(".ps").textContent;
+    document.getElementById("t-do").textContent = row.getAttribute("data-do");
+    rows.forEach(function (r, j) {
+      var on = j === i;
+      r.classList.toggle("on", on);
+      var b = r.querySelector(".pin");
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.textContent = on ? "Today's focus" : "Focus today";
+    });
+  }
+
+  function doneCount(checks) {
+    var n = 0;
+    for (var i = 0; i < COUNT; i++) if (checks && checks[i]) n++;
+    return n;
+  }
+
+  function renderProgress() {
+    var n = doneCount(state.checks);
+    document.getElementById("prog-text").textContent = n + " of " + COUNT;
+    document.getElementById("prog-bar").style.width = (n / COUNT * 100) + "%";
+  }
+
+  function renderWeek() {
+    var host = document.getElementById("week");
+    host.textContent = "";
+    for (var back = 6; back >= 0; back--) {
+      var d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - back);
+      var s = back === 0 ? state : read(keyFor(d));
+      var n = doneCount(s && s.checks);
+      var cell = document.createElement("div");
+      cell.className = "d" + (back === 0 ? " now" : "");
+      var sq = document.createElement("div");
+      sq.className = "sq";
+      sq.style.setProperty("--fill", (n / COUNT * 100) + "%");
+      sq.title = d.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "short" }) + ": " + n + " of " + COUNT;
+      var lab = document.createElement("span");
+      lab.className = "label";
+      lab.textContent = d.toLocaleDateString("en-IN", { weekday: "narrow" });
+      cell.appendChild(sq);
+      cell.appendChild(lab);
+      host.appendChild(cell);
+    }
+  }
+
+  document.getElementById("t-date").textContent =
+    now.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short", year: "numeric" });
+
+  boxes.forEach(function (box, i) {
+    box.checked = !!state.checks[i];
+    box.addEventListener("change", function () {
+      state.checks[i] = box.checked;
+      save();
+      renderProgress();
+      renderWeek();
+    });
+  });
+
+  var review = document.getElementById("review");
+  review.value = state.review;
+  review.addEventListener("input", function () {
+    state.review = review.value;
+    save();
+  });
+
+  rows.forEach(function (r, j) {
+    r.querySelector(".pin").addEventListener("click", function () {
+      state.pin = state.pin === j ? null : j;
+      save();
+      renderFocus();
+      var t = document.getElementById("today");
+      if (t && t.scrollIntoView) t.scrollIntoView({ block: "start" });
+    });
+  });
+
+  renderFocus();
+  renderProgress();
+  renderWeek();
+})();
+</script>
+
+</body>
+</html>
